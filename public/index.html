@@ -148,11 +148,16 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Home Section</a>
+                    <a class="navbar-brand" href="#">Dashboard</a>
                 </div>
                 <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                          <li class="dropdown">
+                    <ul class="nav navbar-nav navbar-left">
+                        <li>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-dashboard"></i>
+                            </a>
+                        </li>
+                        <li class="dropdown">
                               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <i class="fa fa-globe"></i>
                                     <b class="caret"></b>
@@ -167,6 +172,14 @@
                               </ul>
                         </li>
                         <li>
+                           <a href="">
+                                <i class="fa fa-search"></i>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
                             <a href="#">
                                 Log out
                             </a>
@@ -179,10 +192,14 @@
 
         <div class="content">
             <div class="container-fluid">
-                    <div ng-repeat="pin in ledPins" class="buttons small col-lg-2">
-                        <a class="green" ng-click="ledOn(pin);" ng-show="pin.status==false" href=""><span class="iconic lightbulb"></span></a>
-                        <a class="red" ng-click="ledOff(pin)" ng-hide="pin.status==false" href=""><span class="iconic lightbulb"></span></a>
+                <div class="row">
+                    <div ng-repeat="pin in ledPins" class="buttons small">
+<!--                         <a class="green" ng-click="ledOn(pin);" ng-show="pin.status==false" href=""><span class="iconic lightbulb"></span></a>
+                        <a class="red" ng-click="ledOff(pin)" ng-hide="pin.status==false" href=""><span class="iconic lightbulb"></span></a>  -->
+                        <button ng-click="ledOn(pin);" ng-show="pin.status==false">Turn led {{pin.number}} on</button>
+                        <button ng-click="ledOff(pin)" ng-hide="pin.status==false">Turn led {{pin.number}} off</button> -->
                     </div>
+                </div>
             </div>
         </div>
     </div>
