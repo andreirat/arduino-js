@@ -1,9 +1,11 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
-<head>
+<!-- <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Home Automation</title>
+  <link rel="stylesheet" type="text/css" href="css/dashboard.css">
+
 </head>
 <body>
 
@@ -11,6 +13,8 @@
   <script src="lib/socket.io-client/socket.io.js"></script>
   <script src="lib/angularjs/angular.js"></script>  
   <script src="lib/angular-socket-io/socket.js"></script>
+  <script src="js/client.js"></script>
+
 	<h1>Light Controll</h1>
   <div ng-controller="ArduController">
   	<div ng-repeat="pin in ledPins">
@@ -19,39 +23,189 @@
   	</div>
   </div>
 
-<script type="text/javascript">
-	var app = angular.module('myApp', ['btford.socket-io']).
-    factory('mySocket', function (socketFactory) {
-        return socketFactory();
-    }).
-	controller('ArduController', function ($scope,mySocket) {
-		$scope.ledPins = [
-			{number:0, status:false},
-			{number:1, status:false},
-			{number:2, status:false},
-			{number:3, status:false},
-			{number:4, status:false},
-			{number:5, status:false},
-			{number:6, status:false},
-			{number:7, status:false}
-			];
+</body> -->
+
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+	<meta charset="utf-8" />
+	<link rel="icon" type="image/png" href="img/favicon.ico">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+	<title>Light Bootstrap Dashboard by Creative Tim</title>
+
+	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
 
 
-		$scope.ledOn = function (p) {
- 			var emit = 'led'+p.number+':on';
- 			p.status=true;
-	        mySocket.emit(emit);
-	        console.log('Led '+ p.number + ' is on');
-	    };
-    
-	    
-	    $scope.ledOff = function (p) {
-	    	p.status=false;
-	 		var emit = 'led'+p.number+':off';
-	        mySocket.emit(emit); 
-	        console.log('Led '+ p.number + ' is off');  
-	    };    
-});
+    <!-- Bootstrap core CSS     -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
 
-</script>
+    <!-- Animation library for notifications   -->
+    <link href="css/animate.min.css" rel="stylesheet"/>
+
+    <!--  Light Bootstrap Table core CSS    -->
+    <link href="css/light-bootstrap-dashboard.css" rel="stylesheet"/>
+
+
+    <!--  CSS for Demo Purpose, don't include it in your project     -->
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+	<link rel="stylesheet" href="css/iconic_fill.css" type="text/css">
+	
+    <link href="css/demo.css" rel="stylesheet" />
+    <link href="css/dashboard.css" rel="stylesheet" />
+
+    <!--     Fonts and icons     -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+    <link href="css/pe-icon-7-stroke.css" rel="stylesheet" />
+
+        <script src="lib/socket.io-client/socket.io.js"></script>
+  	<script src="lib/angularjs/angular.js"></script>  
+ 	<script src="lib/angular-socket-io/socket.js"></script>
+ 	<script src="js/client.js"></script>
+
+</head>
+<body ng-controller="ArduController">
+
+<div class="wrapper">
+    <div class="sidebar" data-color="purple" data-image="img/sidebar-5.jpg">
+
+    <!--
+
+        Tip 1: you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple"
+        Tip 2: you can also add an image using data-image tag
+
+    -->
+
+    	<div class="sidebar-wrapper">
+            <div class="logo">
+                <a href="http://www.creative-tim.com" class="simple-text">
+                    Creative Tim
+                </a>
+            </div>
+
+            <ul class="nav">
+                <li class="active">
+                    <a href="dashboard.html">
+                        <i class="pe-7s-graph"></i>
+                        <p>General</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="user.html">
+                        <i class="pe-7s-user"></i>
+                        <p>User Profile</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="table.html">
+                        <i class="pe-7s-note2"></i>
+                        <p>Table List</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="typography.html">
+                        <i class="pe-7s-news-paper"></i>
+                        <p>Typography</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="icons.html">
+                        <i class="pe-7s-science"></i>
+                        <p>Icons</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="maps.html">
+                        <i class="pe-7s-map-marker"></i>
+                        <p>Maps</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="notifications.html">
+                        <i class="pe-7s-bell"></i>
+                        <p>Notifications</p>
+                    </a>
+                </li>
+				<li class="active-pro">
+                    <a href="upgrade.html">
+                        <i class="pe-7s-rocket"></i>
+                        <p>Upgrade to PRO</p>
+                    </a>
+                </li>
+            </ul>
+    	</div>
+    </div>
+
+    <div class="main-panel">
+        <nav class="navbar navbar-default navbar-fixed">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Home Section</a>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                          <li class="dropdown">
+                              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="fa fa-globe"></i>
+                                    <b class="caret"></b>
+                                    <span class="notification">5</span>
+                              </a>
+                              <ul class="dropdown-menu">
+                                <li><a href="#">Notification 1</a></li>
+                                <li><a href="#">Notification 2</a></li>
+                                <li><a href="#">Notification 3</a></li>
+                                <li><a href="#">Notification 4</a></li>
+                                <li><a href="#">Another notification</a></li>
+                              </ul>
+                        </li>
+                        <li>
+                            <a href="#">
+                                Log out
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+
+        <div class="content">
+            <div class="container-fluid">
+                    <div ng-repeat="pin in ledPins" class="buttons small col-lg-2">
+                        <a class="green" ng-click="ledOn(pin);" ng-show="pin.status==false" href=""><span class="iconic lightbulb"></span></a>
+                        <a class="red" ng-click="ledOff(pin)" ng-hide="pin.status==false" href=""><span class="iconic lightbulb"></span></a>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
+
+    <!--   Core JS Files   -->
+    <script src="js/jquery-1.10.2.js" type="text/javascript"></script>
+	<script src="js/bootstrap.min.js" type="text/javascript"></script>
+
+	<!--  Checkbox, Radio & Switch Plugins -->
+	<script src="js/bootstrap-checkbox-radio-switch.js"></script>
+
+	<!--  Charts Plugin -->
+	<script src="js/chartist.min.js"></script>
+
+    <!--  Notifications Plugin    -->
+    <script src="js/bootstrap-notify.js"></script>
+
+    <!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
+	<script src="js/light-bootstrap-dashboard.js"></script>
+
+	<!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
+	<script src="js/demo.js"></script>
+
+</html>
