@@ -1,30 +1,3 @@
-<!-- <!DOCTYPE html>
-<html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
-<!-- <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Home Automation</title>
-  <link rel="stylesheet" type="text/css" href="css/dashboard.css">
-
-</head>
-<body>
-
-
-  <script src="lib/socket.io-client/socket.io.js"></script>
-  <script src="lib/angularjs/angular.js"></script>  
-  <script src="lib/angular-socket-io/socket.js"></script>
-  <script src="js/client.js"></script>
-
-	<h1>Light Controll</h1>
-  <div ng-controller="ArduController">
-  	<div ng-repeat="pin in ledPins">
-  		<button ng-click="ledOn(pin);" ng-show="pin.status==false">Turn led {{pin.number}} on</button>
-    	<button ng-click="ledOff(pin)" ng-hide="pin.status==false">Turn led {{pin.number}} off</button>
-  	</div>
-  </div>
-
-</body> -->
-
 <!doctype html>
 <html lang="en" ng-app="myApp">
 <head>
@@ -32,7 +5,7 @@
 	<link rel="icon" type="image/png" href="img/favicon.ico">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-	<title>Light Bootstrap Dashboard by Creative Tim</title>
+	<title>Smart Home | Project</title>
 
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
@@ -46,6 +19,7 @@
 
     <!--  Light Bootstrap Table core CSS    -->
     <link href="css/light-bootstrap-dashboard.css" rel="stylesheet"/>
+    <link href="/bower_components/components-font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
 
 
     <!--  CSS for Demo Purpose, don't include it in your project     -->
@@ -55,12 +29,13 @@
     <link href="css/demo.css" rel="stylesheet" />
     <link href="css/dashboard.css" rel="stylesheet" />
 
+
     <!--     Fonts and icons     -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
     <link href="css/pe-icon-7-stroke.css" rel="stylesheet" />
 
-        <script src="lib/socket.io-client/socket.io.js"></script>
+    <script src="lib/socket.io-client/socket.io.js"></script>
   	<script src="lib/angularjs/angular.js"></script>  
  	<script src="lib/angular-socket-io/socket.js"></script>
  	<script src="js/client.js"></script>
@@ -71,31 +46,18 @@
 <div class="wrapper">
     <div class="sidebar" data-color="purple" data-image="img/sidebar-5.jpg">
 
-    <!--
-
-        Tip 1: you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple"
-        Tip 2: you can also add an image using data-image tag
-
-    -->
-
     	<div class="sidebar-wrapper">
             <div class="logo">
-                <a href="http://www.creative-tim.com" class="simple-text">
-                    Creative Tim
+                <a href="http://andreirat.bitbucket.org" class="simple-text">
+                    Rat Andrei
+                    <img src="" alt="">
                 </a>
             </div>
-
             <ul class="nav">
                 <li class="active">
                     <a href="dashboard.html">
                         <i class="pe-7s-graph"></i>
                         <p>General</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="user.html">
-                        <i class="pe-7s-user"></i>
-                        <p>User Profile</p>
                     </a>
                 </li>
                 <li>
@@ -105,33 +67,15 @@
                     </a>
                 </li>
                 <li>
-                    <a href="typography.html">
-                        <i class="pe-7s-news-paper"></i>
-                        <p>Typography</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="icons.html">
-                        <i class="pe-7s-science"></i>
-                        <p>Icons</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="maps.html">
-                        <i class="pe-7s-map-marker"></i>
-                        <p>Maps</p>
-                    </a>
-                </li>
-                <li>
                     <a href="notifications.html">
                         <i class="pe-7s-bell"></i>
                         <p>Notifications</p>
                     </a>
                 </li>
-				<li class="active-pro">
-                    <a href="upgrade.html">
-                        <i class="pe-7s-rocket"></i>
-                        <p>Upgrade to PRO</p>
+                <li>
+                    <a href="user.html">
+                        <i class="pe-7s-user"></i>
+                        <p>User Profile</p>
                     </a>
                 </li>
             </ul>
@@ -148,37 +92,23 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Dashboard</a>
                 </div>
                 <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav navbar-left">
-                        <li>
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="fa fa-dashboard"></i>
-                            </a>
-                        </li>
+                    <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
-                              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <i class="fa fa-globe"></i>
-                                    <b class="caret"></b>
-                                    <span class="notification">5</span>
-                              </a>
-                              <ul class="dropdown-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-globe"></i>
+                                <b class="caret"></b>
+                                <span class="notification">5</span>
+                            </a>
+                            <ul class="dropdown-menu">
                                 <li><a href="#">Notification 1</a></li>
                                 <li><a href="#">Notification 2</a></li>
                                 <li><a href="#">Notification 3</a></li>
                                 <li><a href="#">Notification 4</a></li>
                                 <li><a href="#">Another notification</a></li>
-                              </ul>
+                            </ul>
                         </li>
-                        <li>
-                           <a href="">
-                                <i class="fa fa-search"></i>
-                            </a>
-                        </li>
-                    </ul>
-
-                    <ul class="nav navbar-nav navbar-right">
                         <li>
                             <a href="#">
                                 Log out
@@ -190,14 +120,12 @@
         </nav>
 
 
-        <div class="content">
+        <div class="container">
             <div class="container-fluid">
                 <div class="row">
-                    <div ng-repeat="pin in ledPins" class="buttons small">
-<!--                         <a class="green" ng-click="ledOn(pin);" ng-show="pin.status==false" href=""><span class="iconic lightbulb"></span></a>
-                        <a class="red" ng-click="ledOff(pin)" ng-hide="pin.status==false" href=""><span class="iconic lightbulb"></span></a>  -->
-                        <button ng-click="ledOn(pin);" ng-show="pin.status==false">Turn led {{pin.number}} on</button>
-                        <button ng-click="ledOff(pin)" ng-hide="pin.status==false">Turn led {{pin.number}} off</button> -->
+                    <div class="col-lg-2 col-md-4 col-xs-6 " ng-repeat="pin in ledPins">
+                        <div><i class="fa fa-lightbulb-o fa-4x"  ng-click="ledOn(pin);" ng-show="pin.status==false"></i><span>{{led.number}}</span></div>
+                        <i class="fa fa-lightbulb-o fa-4x" style="color:{{pin.color}};" ng-click="ledOff(pin)" ng-hide="pin.status==false"></i>
                     </div>
                 </div>
             </div>

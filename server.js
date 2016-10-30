@@ -36,91 +36,15 @@ board.on("ready", function() {
 
 io.on('connection', function (socket) {
         console.log(socket.id);
-        socket.on('led0:on', function (data) {
-            leds[0].on();
-           console.log('LED ON RECEIVED');
+    var mesaj = {};
+        socket.on('led:on', function (data) {
+            leds[data.number].on();
+           console.log('Led '+data.number+' on');
         });
 
-        socket.on('led0:off', function (data) {
-            leds[0].off();
-            console.log('LED OFF RECEIVED');
-            
-        });
-
-                socket.on('led1:on', function (data) {
-            leds[1].on();
-           console.log('LED ON RECEIVED');
-        });
-
-        socket.on('led1:off', function (data) {
-            leds[1].off();
-            console.log('LED OFF RECEIVED');
-            
-        });
-
-                socket.on('led2:on', function (data) {
-            leds[2].on();
-           console.log('LED ON RECEIVED');
-        });
-
-        socket.on('led2:off', function (data) {
-            leds[2].off();
-            console.log('LED OFF RECEIVED');
-            
-        });
-
-                socket.on('led3:on', function (data) {
-            leds[3].on();
-           console.log('LED ON RECEIVED');
-        });
-
-        socket.on('led3:off', function (data) {
-            leds[3].off();
-            console.log('LED OFF RECEIVED');
-            
-        });
-
-                socket.on('led4:on', function (data) {
-            leds[4].on();
-           console.log('LED ON RECEIVED');
-        });
-
-        socket.on('led4:off', function (data) {
-            leds[4].off();
-            console.log('LED OFF RECEIVED');
-            
-        });
-
-                socket.on('led5:on', function (data) {
-            leds[5].on();
-           console.log('LED ON RECEIVED');
-        });
-
-        socket.on('led5:off', function (data) {
-            leds[5].off();
-            console.log('LED OFF RECEIVED');
-            
-        });
-
-                socket.on('led6:on', function (data) {
-            leds[6].on();
-           console.log('LED ON RECEIVED');
-        });
-
-        socket.on('led6:off', function (data) {
-            leds[6].off();
-            console.log('LED OFF RECEIVED');
-            
-        });
-
-                socket.on('led7:on', function (data) {
-            leds[7].on();
-           console.log('LED ON RECEIVED');
-        });
-
-        socket.on('led7:off', function (data) {
-            leds[7].off();
-            console.log('LED OFF RECEIVED');
+        socket.on('led:off', function (data) {
+            leds[data.number].off();
+            console.log('Led '+data.number+' off');
             
         });
     });
