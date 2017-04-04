@@ -18,58 +18,86 @@ app.get('/', function(req, res) {
     res.sendFile(__dirname + '/public/pages/index.html');
 });
 httpServer.listen(port);
-console.log('Server available at http://localhost:' + port);
 
-var clients = [];
-var led;
-var leds = [];
-var ledPins = [];
-var oled;
-
-/*
- ** @description Options for Oled display SSD1306
- */
-var opts = {
-    width: 128,
-    height: 64,
-    address: 0x3C
-};
+console.log('Hello Rat ! Server is runing on port' + port);
 
 
+
+// When board is ready ...
 board.on("ready", function() {
-    console.log('Arduino connected');
-
+    console.log('Your system is ready. Board id is ' +board.id);
 
     oled = new Oled(board, five, opts);
     oled.turnOnDisplay();
     oled.clearDisplay(true);
     oled.update();
 
-    //set rgb pins
-    led = new five.Led.RGB({
+    // ----------------------- Declarations ------------------ //
+    var oled;
+
+    /*
+     ** @description Options for Oled display SSD1306
+     */
+    var opts = {
+        width: 128,
+        height: 64,
+        address: 0x3C
+    };
+
+    // Create a new `joystick` hardware instance.
+    var joystick = new five.Joystick({
+        pins: ["A0", "A1"]
+    });
+
+    // Light Sensor
+    var light = new five.Light("A0");
+
+    //  Motion Sensor
+    var motion = new five.Motion({
+        pin: 3
+    });
+
+    // RGB pins set-up 
+    var led = new five.Led.RGB({
         pins: {
-            red: 3,
+            red: 2,
             green: 5,
             blue: 6
         }
     });
-    //set initial state of rgb
+
+    // Set LED pins
+    var ledPins = [7,8,10,11];
+    var leds = new five.Leds(ledPins);
+
+
+
+    // --------------------------- Logic ------------------------- //
+
+    // set initial state of RGB
     led.color({
         red: 0,
-        blue: 0,
-        green: 0
+        green: 0,
+        blue:0
     });
-    //set LED pins
-    ledPins = [7,8,10,11];
-    leds = new five.Leds(ledPins);
 
-    //Set motion pin
-    var motion = new five.Motion({
-        pin: 2
-    });
+
+      light.on("change", function() {
+        console.log(this.level);
+      });
+
+
+ 
+
+
+
+
+   
+
 
     // "calibrated" occurs once, at the beginning of a session,
-    motion.on("calibrated", function() {
+    motion.on("calibrated", function(data) {
+        console.log(data);
         console.log("calibrated");
     });
 
@@ -92,42 +120,85 @@ board.on("ready", function() {
         leds[2].on();
         console.log("motionend");
     });
-});
-io.on('connection', function (socket) {
-    console.info('New client connected (id=' + socket.id + ').');
-    clients.push(socket);
 
+
+
+    joystick.on("change", function() {
+        var axis = {
+            x: this.x,
+            y: this.y
+        };
+        if( this.x > 0.5 ){
+            toggle(0);
+        } else if(this.x < -0.5 ){
+            toggle(1)
+        }else if( this.y > 0.5){
+            toggle(2)
+        }else if( this.y < -0.5){
+            toggle(3)
+        }
+
+        io.emit('joystick', axis);
+    });
+
+    function toggle(l){
+        leds.each(function(led, index) {
+            if (index == l ) {
+                led.on();
+            } else {
+                led.off();
+            }
+        });
+    }
+});
+
+// Socket logic 
+io.on('connection', function (socket) {
+
+    console.info('New client connected (id=' + socket.id + ').');
+
+    // Led ON action
     socket.on('led:on', function (data) {
         leds[data.number].on();
         console.log('Led '+data.number+' on');
     });
 
+    // Led OFF action
     socket.on('led:off', function (data) {
         leds[data.number].off();
         console.log('Led '+data.number+' off');
 
     });
 
+    // RGB action
     socket.on('rgb',function(data){
+        console.log(data);
         led.color({
             red: data[0].value,
-            blue: data[1].value,
-            green: data[2].value
+            green: data[1].value,
+            blue: data[2].value
         });
         led.on();
     });
 
+    // Show text on display action
     socket.on('pushText', function (data) {
         console.log(data);
         writestring(data);
     });
+    
 
+    /*
+    ** Clear display action
+    */
     socket.on('clearText', function () {
         clearDisplay();
     });
-
 });
 
+/*
+** Function to write data on display
+*/
 function writestring(data){
     oled.clearDisplay(true);
     oled.update();
@@ -136,6 +207,9 @@ function writestring(data){
     oled.update();
 }
 
+/*
+**  Function to clear display
+*/
 function clearDisplay(){
     oled.clearDisplay(true);
     oled.update();

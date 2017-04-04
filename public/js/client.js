@@ -55,6 +55,11 @@ var app = angular.module('myApp', ['btford.socket-io'])
 		console.log('Led '+ p.number + ' is off');
 	};
 
+	mySocket.on('joystick', function (axis) {
+		$scope.joystickDirectionX = axis.x;
+		$scope.joystickDirectionY = axis.y;
+	});
+
 	mySocket.on('motionstart', function (data) {
 		$scope.motion = true;
 		var date = new Date(data);
