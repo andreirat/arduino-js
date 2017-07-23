@@ -45,24 +45,13 @@
                         <p>Home</p>
                     </a>
                 </li>
-                <li>
-                    <a data-toggle="tab" href="#lights">
-                        <i class="pe-7s-light"></i>
-                        <p>Lights</p>
-                    </a>
-                </li>
-                <li>
-                    <a data-toggle="tab" href="#security">
-                        <i class="pe-7s-shield"></i>
-                        <p>Security</p>
-                    </a>
-                </li>
-                <li>
-                    <a data-toggle="tab" href="#energy">
-                        <i class="pe-7s-plug"></i>
-                        <p>Energy</p>
-                    </a>
-                </li>
+                <!--<li>-->
+                    <!--<a data-toggle="tab" href="#lights">-->
+                        <!--<i class="pe-7s-light"></i>-->
+                        <!--<p>Lights</p>-->
+                    <!--</a>-->
+                <!--</li>-->
+
             </ul>
         </div>
     </div>
@@ -107,78 +96,28 @@
         <div class="container-fluid">
             <div class="tab-content">
                 <div id="home" class="tab-pane fade in active">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <h5>Lights</h5>
-                        </div>
-                        <div class="panel-body">
-                            <div style="margin-top: 20px;" class="col-lg-6 col-md-6 col-xs-6 " ng-repeat="pin in ledPins">
-                                <div><i class="fa fa-lightbulb-o fa-4x"  ng-click="ledOn(pin);" ng-show="pin.status==false"></i><span>{{led.number}}</span></div>
-                                <i class="fa fa-lightbulb-o fa-4x" style="color:{{pin.color}};" ng-click="ledOff(pin)" ng-hide="pin.status==false"></i>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card ">
+                                <div class="header">
+                                    <h4 class="title">Servos</h4>
+                                    <p class="category"></p>
+                                </div>
+                                <div class="content">
+                                    <input type="range" style="height: 45px;" min="0" max="180" ng-model="servo1" ng-change="servo1Change();">
+                                    <input type="range" style="height: 45px;" min="0" max="180" ng-model="servo2" ng-change="servo2Change();">
+                                    <button type="button" ng-click="sendData();">Send</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="container">
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">
-                                <h5>Joystick</h5>
-                            </div>
-                            <div class="panel-body">
-                              X:  {{joystickDirectionX}}
-                              Y:  {{joystickDirectionY}}
 
-                            </div>
-                        </div>
                     </div>
                 </div>
-                <div id="lights" class="tab-pane fade">
-                    <div class="panel panel-info">
-                        <div class="panel-heading">
-                            <h5>Ambiental lights</h5>
-                        </div>
-                        <div class="panel-body">
-                            <div style="margin-top: 20px;" class="col-lg-4 col-md-4 col-xs-6">
-                                <p>Red <small id="redPercentage"></small></p>
-                                <input type="range" id="red" name="range" ng-model="redcolor" min="1" ng-change="setLevelText()"  max="255">
-                            </div>
-                            <div style="margin-top: 20px;" class="col-lg-4 col-md-4 col-xs-6">
-                                <p>Green <small id="greenPercentage"></small></p>
-                                <input type="range" id="green" name="range" ng-model="greencolor" min="1" ng-change="setLevelText()"  max="255">
-                            </div>
+                <!--<div id="lights" class="tab-pane fade">-->
+                   <!---->
+                <!--</div>-->
 
-                            <div style="margin-top: 20px;" class="col-lg-4 col-md-4 col-xs-6">
-                                <p>Blue <small id="bluePercentage"></small></p>
-                                <input type="range" id="blue" name="range" ng-model="bluecolor" min="1" ng-change="setLevelText()"  max="255">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div id="security" class="tab-pane fade">
-                    <div class="panel panel-success">
-                        <div class="panel-heading">
-                            <h5>Activity status</h5>
-                        </div>
-                        <div class="panel-body">
-                            <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12" ng-show="motion">
-                                <p>Last recorded activity:</p>
-                                <!--<p class="motionstart"><i class="glyphicon glyphicon-eye-open"></i></p>-->
-                                <input type="datetime" ng-model="motionstart" readonly>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12" ng-show="nomotion">
-                                <p>No activity since:</p>
-                                <!--<p class="motionstart"><i class="glyphicon glyphicon-eye-close"></i></p>-->
-                                <input type="datetime" ng-model="motionend" readonly>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div id="energy" class="tab-pane fade">
-                    <h4>Oled Draw</h4>
-                    <input type="text" ng-model="lcdtext">
-                    <br/>
-                    <button id="clear" ng-click="clearText();">Clear Text</button>
-                    <button id="invert" ng-click="pushText();">Push text</button>
-                </div>
+
             </div>
 
         </div>
