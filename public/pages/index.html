@@ -96,17 +96,36 @@
         <div class="container-fluid">
             <div class="tab-content">
                 <div id="home" class="tab-pane fade in active">
-                    <div class="row">
+                    <div class="row" style="margin-top: 10px;">
                         <div class="col-md-6">
                             <div class="card ">
                                 <div class="header">
-                                    <h4 class="title">Servos</h4>
-                                    <p class="category"></p>
+                                    <h4 class="title">Servo 1</h4>
+                                    <p class="category">{{ servo1 }} degrees</p>
                                 </div>
                                 <div class="content">
                                     <input type="range" style="height: 45px;" min="0" max="180" ng-model="servo1" ng-change="servo1Change();">
+                                </div>
+                                <div class="content">
+                                    <button type="button" ng-click="centerServo(0);">Center</button>
+                                    <button type="button" ng-click="minServo(0);">Min</button>
+                                    <button type="button" ng-click="maxServo(0);">Max</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card ">
+                                <div class="header">
+                                    <h4 class="title">Servo 2</h4>
+                                    <p class="category">{{ servo2 }} degrees</p>
+                                </div>
+                                <div class="content">
                                     <input type="range" style="height: 45px;" min="0" max="180" ng-model="servo2" ng-change="servo2Change();">
-                                    <button type="button" ng-click="sendData();">Send</button>
+                                </div>
+                                <div class="content">
+                                    <button type="button" ng-click="centerServo(1);">Center</button>
+                                    <button type="button" ng-click="minServo(1);">Min</button>
+                                    <button type="button" ng-click="maxServo(1);">Max</button>
                                 </div>
                             </div>
                         </div>

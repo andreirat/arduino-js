@@ -12,27 +12,26 @@ var app = angular.module('myApp', ['btford.socket-io'])
 
 .controller('ArduController', function ($scope,mySocket) {
 
-    $scope.servo1 = '';
-    $scope.servo2 = '';
+    $scope.servo1 = 90;
+    $scope.servo2 = 90;
 
     $scope.servo1Change = function () {
-        console.log($scope.servo1);
         mySocket.emit('servo:1', $scope.servo1);
     };
     $scope.servo2Change = function () {
-        console.log($scope.servo2);
         mySocket.emit('servo:2', $scope.servo2);
     };
 
-    $scope.sendData = function () {
-        console.log($scope.servo1);
-        console.log($scope.servo2);
-        mySocket.emit('servo:data', $scope.servo1);
-
+    $scope.centerServo = function (servo) {
+        servo===0?$scope.servo1=90:$scope.servo2=90;
+        mySocket.emit('servo:center', servo);
     };
-
-    mySocket.on('hey', function (data) {
-        console.log(data);
-    });
-
+    $scope.minServo = function (servo) {
+        servo===0?$scope.servo1=0:$scope.servo2=0;
+        mySocket.emit('servo:min', servo);
+    };
+    $scope.maxServo = function (servo) {
+        servo===0?$scope.servo1=180:$scope.servo2=180;
+        mySocket.emit('servo:max', servo);
+    }
 });

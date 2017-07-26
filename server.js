@@ -26,20 +26,23 @@ board.on("ready", function() {
     this.repl.inject({
         servos: servos
     });
-    
-
 });
 
 io.on('connection', function (socket) {
     console.info('New client connected (id=' + socket.id + ').');
     socket.on('servo:1', function(data) {
-        console.log(data);
         servos[0].to(data);
     });
     socket.on('servo:2', function(data) {
         servos[1].to(data);
     });
-    socket.on('servo:data', function(data) {
-        console.log(data);
+    socket.on('servo:center', function(data) {
+       servos[data].center();
+    });
+    socket.on('servo:min', function(data) {
+       servos[data].min();
+    });
+    socket.on('servo:max', function(data) {
+       servos[data].max();
     });
 });
